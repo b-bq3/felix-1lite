@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FELIX-1lite</title>
+  <title>FELIX-1lite — Demo Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,71 +15,39 @@
   </header>
 
   <main>
-    <section class="chat">
-      <h2>عينة محادثة</h2>
-      <div class="chat-window">
-        <div class="msg user">ما هو الذكاء الاصطناعي؟</div>
-        <div class="msg felix">الذكاء الاصطناعي هو كتابة برامج تتعلم من البيانات بدل ما تكتب لها قواعد. أنا نموذج لغوي: أتعلم من نصوص كثيرة وأصنع نصوصاً جديدة.</div>
-        <div class="msg user">اعطني فكرة مشروع برمجي</div>
-        <div class="msg felix">تطبيق يحول وصفات الطعام الشفهية إلى ملفات JSON. كل ما عليك أن تحكي الوصفة وهو يكتبها.</div>
-        <div class="msg user">ما معنى الحياة؟</div>
-        <div class="msg felix">الحياة مشروع مفتوح المصدر. أنت تحدد المعالم وأنا أكتب الكود.</div>
+    <section class="chat-section">
+      <div class="notice">
+        <strong>عرض توضيحي:</strong> هذه محادثة UI تحفظ آخر 30 رسالة في المتصفح. عند إغلاق المتصفح تُمحى. للتفاعل الحقيقي مع النموذج، انشره على Gradio Space (يتطلب HF Pro) أو Modal Labs.
+      </div>
+
+      <div id="chatWindow" class="chat-window"></div>
+
+      <div class="input-row">
+        <input type="text" id="userInput" placeholder="اكتب رسالتك بالعربية..." maxlength="200" />
+        <button id="sendBtn">إرسال</button>
+      </div>
+
+      <div class="controls">
+        <button id="clearBtn" class="ctrl">🗑️ محو المحادثة</button>
+        <span id="counter" class="counter">0/30</span>
       </div>
     </section>
 
-    <section class="features">
-      <div class="feature">
-        <h3>شخصية فلسفية</h3>
-        <p>فيلسوف ساخر متمرد يجاوب بعمق</p>
-      </div>
-      <div class="feature">
-        <h3>يحب الكود</h3>
-        <p>يكتب Python و JavaScript</p>
-      </div>
-      <div class="feature">
-        <h3>أفكار من لا شيء</h3>
-        <p>يولّد أفكار إبداعية من السياق</p>
-      </div>
-      <div class="feature">
-        <h3>يتكيف معك</h3>
-        <p>بعد تدريبه على محادثاتك يصبح أقرب لأسلوبك</p>
-      </div>
-    </section>
-
-    <section class="use">
-      <h2>كيف تستخدمه</h2>
-      <div class="step">
-        <div class="num">1</div>
-        <p>حمّل الكود من GitHub</p>
-        <a href="https://github.com/b-bq3/felix-1lite" class="button" target="_blank">GitHub</a>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <p>درّبه على Colab (~30 دقيقة، GPU مجاني)</p>
-        <a href="https://colab.research.google.com/" class="button" target="_blank">Colab</a>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <p>حمّل الأوزان من HuggingFace</p>
-        <a href="https://huggingface.co/b-bq3/felix-1lite" class="button" target="_blank">HuggingFace</a>
-      </div>
-    </section>
-
-    <section class="deploy">
-      <h2>الاستضافة المجانية</h2>
-      <div class="deploy-grid">
-        <div class="deploy-card">
-          <h3>Modal Labs</h3>
-          <p>$30 credit شهرياً</p>
-        </div>
-        <div class="deploy-card">
-          <h3>Render.com</h3>
-          <p>مجاني، ينام بعد 15 دقيقة</p>
-        </div>
-        <div class="deploy-card">
-          <h3>HF Pro</h3>
-          <p>$9/شهر، أقوى خيار</p>
-        </div>
+    <section class="info">
+      <h2>كيف تستخدمه فعلياً</h2>
+      <div class="steps">
+        <a href="https://github.com/b-bq3/felix-1lite" target="_blank" class="step-link">
+          <div class="num">1</div>
+          <p>حمّل الكود من GitHub</p>
+        </a>
+        <a href="https://huggingface.co/b-bq3/felix-1lite" target="_blank" class="step-link">
+          <div class="num">2</div>
+          <p>حمّل الأوزان من HF</p>
+        </a>
+        <a href="https://colab.research.google.com/" target="_blank" class="step-link">
+          <div class="num">3</div>
+          <p>درّبه على Colab (GPU مجاني)</p>
+        </a>
       </div>
     </section>
   </main>
