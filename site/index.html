@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FELIX-1lite — Demo Chat</title>
+  <title>FELIX-1lite — Real Model Demo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,42 +11,48 @@
 
   <header>
     <h1>FELIX-1lite</h1>
-    <p>نموذج لغوي صغير بالعربية الفصحى</p>
+    <p>عرض حي بنموذج لغوي حقيقي يعمل في المتصفح</p>
   </header>
 
   <main>
     <section class="chat-section">
       <div class="notice">
-        <strong>عرض توضيحي:</strong> هذه محادثة UI تحفظ آخر 30 رسالة في المتصفح. عند إغلاق المتصفح تُمحى. للتفاعل الحقيقي مع النموذج، انشره على Gradio Space (يتطلب HF Pro) أو Modal Labs.
+        <strong>⚡ نموذج حقيقي في المتصفح:</strong> يستخدم <code>transformers.js</code> لتشغيل DistilGPT-2 (82 MB) مباشرة في متصفحك بدون أي backend. عند إغلاق التبويب تختفي الجلسة.
       </div>
 
-      <div id="chatWindow" class="chat-window"></div>
+      <div id="status" class="status loading">
+        <div class="loader"></div>
+        <span id="statusText">جاري تحميل النموذج من HuggingFace Hub... (~82 MB، أول مرة قد يأخذ دقيقة)</span>
+      </div>
 
-      <div class="input-row">
-        <input type="text" id="userInput" placeholder="اكتب رسالتك بالعربية..." maxlength="200" />
+      <div id="chatWindow" class="chat-window" style="display:none;"></div>
+
+      <div class="input-row" id="inputRow" style="display:none;">
+        <input type="text" id="userInput" placeholder="Type anything in English..." maxlength="200" />
         <button id="sendBtn">إرسال</button>
       </div>
 
-      <div class="controls">
+      <div class="controls" id="controls" style="display:none;">
         <button id="clearBtn" class="ctrl">🗑️ محو المحادثة</button>
         <span id="counter" class="counter">0/30</span>
+        <span class="model-info">DistilGPT-2 · WebAssembly</span>
       </div>
     </section>
 
     <section class="info">
-      <h2>كيف تستخدمه فعلياً</h2>
+      <h2>للنموذج العربي الحقيقي (FELIX-1lite)</h2>
       <div class="steps">
         <a href="https://github.com/b-bq3/felix-1lite" target="_blank" class="step-link">
           <div class="num">1</div>
-          <p>حمّل الكود من GitHub</p>
+          <p>حمّل FELIX من GitHub</p>
         </a>
         <a href="https://huggingface.co/b-bq3/felix-1lite" target="_blank" class="step-link">
           <div class="num">2</div>
           <p>حمّل الأوزان من HF</p>
         </a>
-        <a href="https://colab.research.google.com/" target="_blank" class="step-link">
+        <a href="https://modal.com" target="_blank" class="step-link">
           <div class="num">3</div>
-          <p>درّبه على Colab (GPU مجاني)</p>
+          <p>انشر على Modal Labs ($30/شهر مجاناً)</p>
         </a>
       </div>
     </section>
@@ -56,6 +62,6 @@
     <p>MIT License · <a href="https://github.com/b-bq3/felix-1lite" target="_blank">github.com/b-bq3/felix-1lite</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

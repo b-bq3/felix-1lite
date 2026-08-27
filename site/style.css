@@ -36,7 +36,7 @@ header h1 {
   background: linear-gradient(135deg, #818cf8, #6366f1);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-header p { color: var(--muted); margin-top: 0.5rem; }
+header p { color: var(--muted); margin-top: 0.5rem; font-size: 1rem; }
 main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 1rem 1.5rem 3rem; }
 .notice {
   background: rgba(99, 102, 241, 0.1);
@@ -48,7 +48,27 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
   margin-bottom: 1.5rem;
 }
 .notice strong { color: var(--text); }
-.chat-section { margin-bottom: 3rem; }
+.notice code {
+  background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem; border-radius: 0.25rem;
+  font-family: monospace; font-size: 0.85em;
+}
+.status {
+  background: var(--card);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  display: flex; align-items: center; gap: 0.75rem; justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.status.ready { background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3); }
+.loader {
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 .chat-window {
   background: var(--card);
   border-radius: 0.75rem;
@@ -80,6 +100,11 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
   word-wrap: break-word;
 }
 .msg.user > div { background: rgba(52, 211, 153, 0.15); }
+.thinking {
+  font-style: italic; color: var(--muted);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.5; } }
 .input-row {
   display: flex; gap: 0.5rem; margin-bottom: 0.75rem;
 }
@@ -87,8 +112,7 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
   flex: 1; padding: 0.75rem 1rem;
   background: var(--card); border: 1px solid rgba(255,255,255,0.1);
   border-radius: 0.5rem; color: var(--text); font-size: 1rem;
-  font-family: inherit;
-  outline: none;
+  font-family: inherit; outline: none;
 }
 #userInput:focus { border-color: var(--accent); }
 #sendBtn {
@@ -101,7 +125,7 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
 #sendBtn:hover { opacity: 0.85; }
 #sendBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 .controls {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
 }
 .ctrl {
   background: transparent; color: var(--muted);
@@ -112,7 +136,8 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
 }
 .ctrl:hover { color: var(--text); border-color: var(--accent); }
 .counter { color: var(--muted); font-size: 0.85rem; }
-.info h2 { text-align: center; font-size: 1.3rem; margin-bottom: 1.5rem; }
+.model-info { color: var(--muted); font-size: 0.75rem; opacity: 0.7; }
+.info h2 { text-align: center; font-size: 1.2rem; margin-bottom: 1.5rem; }
 .steps {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;
 }
@@ -128,7 +153,7 @@ main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding
   background: linear-gradient(135deg, var(--accent), #818cf8);
   border-radius: 50%; font-weight: 700; margin-bottom: 0.75rem;
 }
-.step-link p { color: var(--muted); font-size: 0.9rem; }
+.step-link p { color: var(--muted); font-size: 0.85rem; }
 footer { text-align: center; padding: 2rem 1rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); margin-top: 3rem; }
 footer a { color: #818cf8; text-decoration: none; }
 @media (max-width: 768px) {
