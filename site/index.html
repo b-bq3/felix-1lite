@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FELIX-1lite — Real Model Demo</title>
+  <title>FELIX-1lite · التوثيق</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,48 +11,136 @@
 
   <header>
     <h1>FELIX-1lite</h1>
-    <p>عرض حي بنموذج لغوي حقيقي يعمل في المتصفح</p>
+    <p>نموذج لغوي صغير بالعربية الفصحى · مبني من الصفر</p>
   </header>
 
   <main>
-    <section class="chat-section">
-      <div class="notice">
-        <strong>⚡ نموذج حقيقي في المتصفح:</strong> يستخدم <code>transformers.js</code> لتشغيل DistilGPT-2 (82 MB) مباشرة في متصفحك بدون أي backend. عند إغلاق التبويب تختفي الجلسة.
-      </div>
-
-      <div id="status" class="status loading">
-        <div class="loader"></div>
-        <span id="statusText">جاري تحميل النموذج من HuggingFace Hub... (~82 MB، أول مرة قد يأخذ دقيقة)</span>
-      </div>
-
-      <div id="chatWindow" class="chat-window" style="display:none;"></div>
-
-      <div class="input-row" id="inputRow" style="display:none;">
-        <input type="text" id="userInput" placeholder="Type anything in English..." maxlength="200" />
-        <button id="sendBtn">إرسال</button>
-      </div>
-
-      <div class="controls" id="controls" style="display:none;">
-        <button id="clearBtn" class="ctrl">🗑️ محو المحادثة</button>
-        <span id="counter" class="counter">0/30</span>
-        <span class="model-info">DistilGPT-2 · WebAssembly</span>
+    <section class="intro">
+      <h2>ما هو FELIX-1lite؟</h2>
+      <p>
+        نموذج لغوي صغير (decoder-only transformer) مبني من الصفر بالعربية الفصحى.
+        شخصية فيلسوف ساخر متمرد، يحب الكود والأفكار الجديدة، ويتكيّف مع المستخدم عبر الـ fine-tuning.
+      </p>
+      <div class="badges">
+        <span>1.9M – 25M parameters</span>
+        <span>PyTorch</span>
+        <span>MIT License</span>
       </div>
     </section>
 
-    <section class="info">
-      <h2>للنموذج العربي الحقيقي (FELIX-1lite)</h2>
-      <div class="steps">
-        <a href="https://github.com/b-bq3/felix-1lite" target="_blank" class="step-link">
-          <div class="num">1</div>
-          <p>حمّل FELIX من GitHub</p>
+    <section class="warning">
+      <h2>⚠️ قبل ما تبدأ</h2>
+      <p>
+        FELIX-1lite <strong>ما يشتغل في المتصفح</strong>. هذي صفحة توثيق فقط.
+        لتشغيل النموذج، اختر طريقة من الأسفل واتبع الخطوات.
+      </p>
+    </section>
+
+    <section class="methods">
+      <h2>طرق التشغيل</h2>
+
+      <div class="method best">
+        <div class="method-tag">⭐ الأفضل · مجاني</div>
+        <h3>1. Google Colab</h3>
+        <p>تدريب كامل على GPU مجاني. ~30 دقيقة للحصول على نموذج قوي.</p>
+        <ol>
+          <li>افتح <a href="https://colab.research.google.com/" target="_blank">colab.research.google.com</a></li>
+          <li>أنشئ notebook جديد</li>
+          <li>Runtime → Change runtime type → <strong>T4 GPU</strong></li>
+          <li>الصق الكود التالي في خلية:</li>
+        </ol>
+        <pre><code>!git clone https://github.com/b-bq3/felix-1lite.git
+%cd felix-1lite
+!pip install torch --quiet
+!python generate_data.py
+!python felix.py</code></pre>
+        <p>بعد ~30 دقيقة، حيكون عندك <code>felix-1lite.pt</code> (100 MB).</p>
+        <p><strong>الاختبار:</strong></p>
+        <pre><code>from felix import chat
+print(chat("ما هو الذكاء الاصطناعي؟"))</code></pre>
+      </div>
+
+      <div class="method">
+        <div class="method-tag">مجاني · تشغيل 24/7</div>
+        <h3>2. Modal Labs</h3>
+        <p>$30 credit شهرياً مجاناً. يشغّل FELIX على سيرفر سحابي بدون انقطاع.</p>
+        <ol>
+          <li>أنشئ حساب مجاني في <a href="https://modal.com" target="_blank">modal.com</a></li>
+          <li>ثبّت CLI: <code>pip install modal</code></li>
+          <li><code>modal token new</code></li>
+          <li>نفّذ <code>modal deploy modal_app.py</code> (الملف في الـ repo)</li>
+        </ol>
+        <p>يعطيك رابط عام تقدر تشاركه.</p>
+      </div>
+
+      <div class="method">
+        <div class="method-tag">مجاني · ينام بعد 15 دقيقة</div>
+        <h3>3. Render.com</h3>
+        <p>استضافة مجانية لكن أبطأ. يصحو خلال 30 ثانية بعد كل زيارة.</p>
+        <ol>
+          <li>اربط حسابك بـ <a href="https://github.com/b-bq3/felix-1lite" target="_blank">GitHub repo</a></li>
+          <li>أنشئ Web Service جديد</li>
+          <li>Environment: Python 3</li>
+          <li>Start command: <code>python app.py</code></li>
+        </ol>
+      </div>
+
+      <div class="method paid">
+        <div class="method-tag">$9/شهر · الأقوى</div>
+        <h3>4. HuggingFace Pro</h3>
+        <p>Gradio Space بدون قيود. أسهل طريقة للاستضافة المدفوعة.</p>
+        <ol>
+          <li>اشترك في <a href="https://huggingface.co/pro" target="_blank">huggingface.co/pro</a></li>
+          <li>أنشئ Space جديد بـ Gradio SDK</li>
+          <li>ارفع felix.py + app.py + felix-1lite.pt</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>المميزات</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🇸🇦 عربية فصحى</h3>
+          <p>مدرّب على بيانات بالعربية الفصحى، يفهم ويجاوب بدقة.</p>
+        </div>
+        <div class="card">
+          <h3>🧠 شخصية فيلسوف</h3>
+          <p>يجاوب بعمق مع لمسة سخرية، مزيج من الحكمة والتمرد.</p>
+        </div>
+        <div class="card">
+          <h3>💻 يحب الكود</h3>
+          <p>يكتب Python و JavaScript ويعطي أمثلة عملية.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 يتكيّف معك</h3>
+          <p>بعد fine-tuning على محادثاتك، يصبح أقرب لأسلوبك.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="links">
+      <h2>الروابط</h2>
+      <div class="link-grid">
+        <a href="https://github.com/b-bq3/felix-1lite" target="_blank" class="link-card">
+          <div class="link-icon">📦</div>
+          <strong>GitHub</strong>
+          <span>الكود + التوثيق</span>
         </a>
-        <a href="https://huggingface.co/b-bq3/felix-1lite" target="_blank" class="step-link">
-          <div class="num">2</div>
-          <p>حمّل الأوزان من HF</p>
+        <a href="https://huggingface.co/b-bq3/felix-1lite" target="_blank" class="link-card">
+          <div class="link-icon">🤗</div>
+          <strong>HuggingFace</strong>
+          <span>الأوزان الجاهزة</span>
         </a>
-        <a href="https://modal.com" target="_blank" class="step-link">
-          <div class="num">3</div>
-          <p>انشر على Modal Labs ($30/شهر مجاناً)</p>
+        <a href="https://colab.research.google.com/" target="_blank" class="link-card">
+          <div class="link-icon">📓</div>
+          <strong>Colab</strong>
+          <span>تدريب مجاني</span>
+        </a>
+        <a href="https://modal.com" target="_blank" class="link-card">
+          <div class="link-icon">☁️</div>
+          <strong>Modal</strong>
+          <span>استضافة سحابية</span>
         </a>
       </div>
     </section>
@@ -61,7 +149,5 @@
   <footer>
     <p>MIT License · <a href="https://github.com/b-bq3/felix-1lite" target="_blank">github.com/b-bq3/felix-1lite</a></p>
   </footer>
-
-  <script type="module" src="script.js"></script>
 </body>
 </html>
